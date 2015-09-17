@@ -4,7 +4,7 @@
 
   <groupId>com.tibco.cts</groupId>
   <artifactId>asmonitor</artifactId>
-  <version>2.1</version>
+  <version>2.2</version>
   <packaging>jar</packaging>
 
   <name>asmonitor</name>
