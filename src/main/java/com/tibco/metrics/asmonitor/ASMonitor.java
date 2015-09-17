@@ -119,10 +119,8 @@ public class ASMonitor {
 						String discovery = props.getProperty(key.replaceFirst("name", "discovery"), "tibpgm").trim();
 						String member = props.getProperty(key.replaceFirst("name", "member"), "").trim();
 						if (!browserMap.containsKey(metaspace)) {
-							// connect to AS and initialize it for stat
-							// collection
 							System.out.println(
-									String.format("Connect to metaspace %s using discovery %s", metaspace, discovery));
+									String.format("Configure metaspace %s using discovery %s", metaspace, discovery));
 							SpaceStatsBrowser browser = new SpaceStatsBrowser(metaspace, discovery, member);
 							browserMap.put(metaspace, browser);
 						}
@@ -183,6 +181,7 @@ public class ASMonitor {
 	 */
 	private static void initializeBrowser(SpaceStatsBrowser browser) {
 		browser.setReportFolder(reportFolder);
+		browser.setConnectTimeout(interval * 900); // 90% of polling interval
 	}
 
 	/**

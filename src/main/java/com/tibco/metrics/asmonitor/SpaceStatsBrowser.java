@@ -27,6 +27,7 @@ public class SpaceStatsBrowser {
 
 	private String reportFolder = null;
 	private String timestamp;
+	private long connectTimeout = 20000;
 
 	Metaspace ms;
 	Space statsSpace;
@@ -49,7 +50,9 @@ public class SpaceStatsBrowser {
 	}
 
 	private void connectAS() throws ASException {
+		System.out.println(String.format("Connecting to %s @ %s", metaspaceName, discovery));
 		MemberDef memberDef = MemberDef.create(memberName, discovery, null);
+		memberDef.setConnectTimeout(connectTimeout);
 		ms = Metaspace.connect(metaspaceName, memberDef);
 		statsSpace = ms.getSpace("$space_stats");
 
@@ -76,6 +79,10 @@ public class SpaceStatsBrowser {
 	 */
 	public void setReportFolder(String reportFolder) {
 		this.reportFolder = reportFolder;
+	}
+
+	public void setConnectTimeout(long timeout) {
+		this.connectTimeout = timeout;
 	}
 
 	/**
